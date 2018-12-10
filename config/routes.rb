@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'events/new'
-  get 'events/edit'
   root 'static_pages#home'
 
   get "signup", to: "users#new"
@@ -9,6 +6,8 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   
   resources :users do
-    resources :events
+    resources :events, only: [:new, :edit, :create, :update, :destroy]
   end
+  
+  resources :events, only: [:index, :show]
 end
