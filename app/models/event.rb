@@ -4,6 +4,7 @@ class Event < ApplicationRecord
   has_many :attendees, through: :attendances
   default_scope -> {order(created_at: :desc)}
   scope :upcoming_events, -> {where("date < ?", Time.now.to_date + 20.days)}
+  validates :title, :date, :venue, :description, presence: true
 
   def add_attendee(user)
     self.attendees.push(user)

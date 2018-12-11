@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   
   resources :users do
-    resources :events, only: [:new, :edit, :create, :update, :destroy]
+    resources :events, only: [:new, :edit, :create, :destroy]
   end
   
-  resources :events, only: [:index, :show]
+  resources :events, only: [:index, :show, :update]
 end
