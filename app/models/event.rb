@@ -3,7 +3,7 @@ class Event < ApplicationRecord
   has_many :attendances, foreign_key: :event_id
   has_many :attendees, through: :attendances
   default_scope -> {order(created_at: :desc)}
-  scope :upcoming_events, -> {where("date < ?", Time.now.to_date + 20.days)}
+  scope :upcoming_events, -> {where("date < ?", Date.today + 8.days)}
   validates :title, :date, :venue, :description, presence: true
 
   def add_attendee(user)
