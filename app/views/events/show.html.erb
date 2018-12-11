@@ -4,7 +4,11 @@
 <p><%= time_ago_in_words(@event.date)%> <%= suffix %> </p>
 <p><%= @event.venue%></p>
 <p><%= @event.description%></p>
-<%= link_to "Attend Event", join_event_path %>
+<% if !@event.attendees.include? current_user %>
+<%= link_to "Attend Event", join_event_path, class: "btn btn-primary" %>
+<% else %>
+<h4>You are attending this event</h4>
+<% end %>
 <hr>
 <% if @event.attendees.any? %>
 <h3>Attendees: </h3>
