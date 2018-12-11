@@ -16,3 +16,17 @@ User.create!(
   password_confirmation: "password"
 )
 end
+
+User.first.events_created.create!(
+  title: "Awesome event",
+  date: Date.today + 5.days,
+  venue: "Pizza Hut",
+  description: "Pizza eating party"
+)
+
+User.last.events_created.create(
+  title: "Event that had happened",
+  date: Date.today - 4.days,
+  venue: "Mars",
+  description: "This has already happened"
+)

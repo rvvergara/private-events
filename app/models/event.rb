@@ -10,4 +10,8 @@ class Event < ApplicationRecord
   def add_attendee(user)
     self.attendees.push(user)
   end
+
+  def event_date
+    self.date.localtime.to_s.gsub(/.\+.{4}/, '')
+end
 end

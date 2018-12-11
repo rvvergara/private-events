@@ -1,12 +1,19 @@
 <h1 class="title"><%= @user.name %></h1>
 
+<% if @user.upcoming_events.any? %>
 <h3 class="is-3">Events <%= @user.name%> will be attending:</h3>
-<% if @user.events_attended.any? %>
+  <ol>
+    <% @user.upcoming_events.each do |event|%>
+      <li><%= link_to event.title, event%></li> 
+    <% end %>
+  </ol>
+<% end %>
+
+<% if @user.past_events.any? %>
+  <h3 class="is-3"><%= @user.name%> had attended the following:</h3>
   <ul>
     <% @user.events_attended.each do |event| %>
      <li><%= link_to event.title, event %></li>
      <% end %>
   </ul>
-<% else %>
-  <strong><%= @user.name%> is not yet attending any event. Invite him!</strong>
 <% end %>

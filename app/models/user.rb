@@ -9,11 +9,11 @@ class User < ApplicationRecord
   has_many :events_created, foreign_key: :creator_id, class_name: "Event"
 
   def upcoming_events
-    self.events_attended.where("date < ?", Date.today + 8.days)
+    self.events_attended.where("date < ? AND date > ?", Date.today + 8.days, Date.today)
   end
 
   def past_events
-    self.events_attended.where("date > ?", Date.today)
+    self.events_attended.where("date < ?", Date.today)
   end
 
 end
