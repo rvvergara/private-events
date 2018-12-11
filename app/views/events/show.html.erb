@@ -4,11 +4,13 @@
 <p><%= time_ago_in_words(@event.date)%> <%= suffix %> </p>
 <p><%= @event.venue%></p>
 <p><%= @event.description%></p>
-
+<% link_to %>
 <hr>
-
+<% if @event.attendees.any? %>
+<h3>Attendees: </h3>
 <% @event.attendees.each do |attendee| %>
   <ol>
-    <li> <%= attendee.name %></li>
+    <li> <%= link_to attendee.name, attendee %></li>
   </ol>
+<% end %>
 <% end %>

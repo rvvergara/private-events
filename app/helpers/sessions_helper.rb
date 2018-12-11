@@ -8,7 +8,14 @@ module SessionsHelper
     # 1. If there's a current session user meaning there is an existing session userID:
     if(session[:user_id])
       # 2. Create a current user if not already assigned:
-      @current_user ||= User.find_select_user(session[:user_id])
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
+  end
+
+  def logged_in_user
+    if !logged_in?
+      flash[:danger] = "Please log in first"
+      redirect_to signin_path
     end
   end
 

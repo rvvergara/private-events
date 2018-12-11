@@ -1,18 +1,8 @@
-<h1>Login</h1>
-<hr>
-<section class="section">
-  <%= form_for(:session, url: login_path) do |f| %>
-    
-    <div class="field">
-      <%= f.label :username %>
-      <%= f.text_field :username %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </div>
-    
-    <%= f.submit %>
-  <% end %>
+<section class="mt-4">
+  <h1>Log In</h1>
+  <%= simple_form_for(:session, url: login_path) do |f|%>
+    <%= f.input :username %>
+    <%= f.input :password %>
+    <%= f.button :submit, "Log In", class: "btn-primary" %>
+  <% end%>
 </section>

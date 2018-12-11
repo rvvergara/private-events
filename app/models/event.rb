@@ -13,5 +13,5 @@ class Event < ApplicationRecord
 
   def event_date
     self.date.localtime.to_s.gsub(/.\+.{4}/, '')
-end
+  end
 end
