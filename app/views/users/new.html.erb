@@ -1,31 +1,12 @@
 <h1>User signup</h1>
 
-<section class="section">
-  <%= form_for @user do |f| %>
-    <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
-    
-    <div class="field">
-      <%= f.label :username %>
-      <%= f.text_field :username %>
-    </div>
-
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-    </div>
-    <div class="field">
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
-    
-    <%= f.submit %>
+<section>
+  <%= simple_form_for @user do |f| %>
+    <%= f.input :name %>
+    <%= f.input :username %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.button :submit %>
   <% end %>
 </section>

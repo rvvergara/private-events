@@ -1,33 +1,7 @@
-<%= form_for [@user, @event] do |f| %>
-  <%= render "shared/error", object: f.object%>
-<section class="section">
-  <div class="field">
-  <%= f.label :title, class: "label" %>
-  <div class="control">
-    <%= f.text_field :title, class: "input" %>
-  </div>
-  <div class="field">
-  <%= f.label :venue, class: "label" %>
-  <div class="control">
-    <%= f.text_field :venue, class: "input" %>
-  </div>
-</div>
-<div class="field">
-  <%= f.label :date, class: "label" %>
-  <div class="control">
-    <%= f.date_field :date, class: "input" %>
-  </div>
-
-<div class="field">
-  <%= f.label :description, class: "label" %>
-  <div class="control">
-  <%= f.text_area :description, class: "textarea" %>
-  </div>
-</div>
-
-<div class="field">
-  <div class="control">
-    <%= f.submit class:"button is-link" %>
-  </div>
-</section>
+<%= simple_form_for [@user, @event] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :date %>
+  <%= f.input :venue %>
+  <%= f.input :description %>
+  <%= f.button :submit %>
 <% end %>
