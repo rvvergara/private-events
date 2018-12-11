@@ -1,0 +1,10 @@
+TODO:
+1. Create the Event Index page to display all events. - X
+
+2. Now make an Event’s Show page display a list of attendees. - X
+
+3. Make a User’s Show page display a list of events they are attending. -X
+
+4. Modify the Event Index page to list all events, separated into Past and Upcoming categories. Use a class method on Event (e.g. Event.past).
+
+5. Put navigation links across the top to help you jump around.

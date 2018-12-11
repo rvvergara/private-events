@@ -12,4 +12,8 @@ class User < ApplicationRecord
     self.events_attended.where("date < ?", Date.today + 8.days)
   end
 
+  def past_events
+    self.events_attended.where("date > ?", Date.today)
+  end
+
 end
