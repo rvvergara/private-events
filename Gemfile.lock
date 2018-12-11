@@ -260,6 +260,7 @@ DEPENDENCIES
   rails (~> 5.2.1)
   rails-controller-testing
   sass-rails (~> 5.0)
+  sassc (~> 2.0)
   selenium-webdriver
   simple_form
   spring
