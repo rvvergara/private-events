@@ -12,7 +12,7 @@
 <% if @user.past_events.any? %>
   <h3 class="is-3"><%= @user.name%> had attended the following:</h3>
   <ul>
-    <% @user.events_attended.each do |event| %>
+    <% @user.past_events.each do |event| %>
      <li><%= link_to event.title, event %></li>
      <% end %>
   </ul>
