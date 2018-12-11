@@ -7,12 +7,12 @@ class EventsController < ApplicationController
   end
 
   def new
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:user_id])
     @event = Event.new
   end
 
   def create
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:user_id])
     @event = @user.events_created.new(event_params)
     if @event.save
       flash[:success] = "#{@event.title} has been created. Invite people to attend!"
