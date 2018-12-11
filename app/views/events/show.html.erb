@@ -4,7 +4,7 @@
 <p><%= time_ago_in_words(@event.date)%> <%= suffix %> </p>
 <p><%= @event.venue%></p>
 <p><%= @event.description%></p>
-<% link_to %>
+<%= link_to "Attend Event", join_event_path %>
 <hr>
 <% if @event.attendees.any? %>
 <h3>Attendees: </h3>
