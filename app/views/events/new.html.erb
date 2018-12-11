@@ -1,6 +1,6 @@
 <h1>Add events</h1>
 <hr>
-<%= form_for [current_user, @event] do |f| %>
+<%= form_for [@user, @event] do |f| %>
 <section class="section">
   <div class="field">
   <%= f.label :title, class: "label" %>
@@ -20,9 +20,9 @@
   </div>
 
 <div class="field">
-  <label class="label">Message</label>
+  <%= f.label :description, class: "label" %>
   <div class="control">
-    <textarea class="textarea" placeholder="Textarea"></textarea>
+  <%= f.text_area :description, class: "textarea" %>
   </div>
 </div>
 

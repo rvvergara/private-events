@@ -7,11 +7,13 @@ class EventsController < ApplicationController
   end
 
   def new
+    @user = User.find_by(id: params[:id])
     @event = Event.new
   end
 
   def create
-    @event = Event.new(event_params)
+    @user = User.find_by(id: params[:id])
+    @event = @user.events_created.new(event_params)
     if @event.save
       flash[:success] = "#{@event.title} has been created. Invite people to attend!"
       redirect_to @event
@@ -31,7 +33,6 @@ class EventsController < ApplicationController
   private
   
   def event_params
-    params.require(:event).permit(:title, :date, :venue)
+    params.require(:event).permit(:title, :date, :venue, :description)
   end
-  
 end
