@@ -1,2 +1,12 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1 class="title"><%= @user.name %></h1>
+
+<h3 class="is-3">Events <%= @user.name%> will be attending:</h3>
+<% if @user.events_attended.any? %>
+  <ul>
+    <% @user.events_attended.each do |event| %>
+     <li><%= link_to event.title, event %></li>
+     <% end %>
+  </ul>
+<% else %>
+  <strong><%= @user.name%> is not yet attending any event. Invite him!</strong>
+<% end %>
