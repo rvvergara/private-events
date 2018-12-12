@@ -1,9 +1,13 @@
-<h1 class="title"><%= @event.title%></h1>
+<h1 class="title"><%= @event.title%> 
+  <% if @event.creator == current_user %>
+  <small><%= link_to "Edit", edit_user_event_path(current_user, @event), class:"btn btn-info btn-sm" %></small>
+  <% end %>
+</h1>
 <hr>
 <div class="row">
   <div class="col-md-8">
     <% if @event.picture.url %>
-      <%= image_tag @event.picture.url %>
+      <%= image_tag @event.picture.url, class: "img-fluid" %>
     <% end %>
   </div>
   <div class="col-md-4">
