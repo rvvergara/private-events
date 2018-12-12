@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   default_scope -> {order(created_at: :desc)}
   scope :upcoming_events, -> {where("date < ? AND date > ?", Date.today + 8.days, Date.today)}
   scope :past_events, -> {where("date < ?", Date.today)}
+  mount_uploader :picture, PictureUploader
   validates :title, :date, :venue, :description, presence: true
 
   def add_attendee(user)
