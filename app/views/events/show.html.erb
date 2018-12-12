@@ -25,7 +25,7 @@
       <% end %>
     <% end %>
     <% if @event.attendees.any? %>
-      <h3><%= pluralize(@event.attendees.count, "Attendee") %> for this event: </h3>
+      <h3><%= pluralize(@event.attendees.count, "person") %> attending this event: </h3>
       <% @event.attendees.each do |attendee| %>
         <ul>
           <li> <%= link_to attendee.name, attendee %></li>
