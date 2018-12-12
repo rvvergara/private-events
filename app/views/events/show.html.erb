@@ -1,24 +1,32 @@
 <h1 class="title"><%= @event.title%></h1>
 <hr>
-<% suffix = Date.today < @event.date ? "from now" : "ago" %>
-<p><%= time_ago_in_words(@event.date)%> <%= suffix %> </p>
-<p><%= @event.venue%></p>
-<p><%= @event.description%></p>
-<% if Event.past_events.include?(@event) %>
-  <h4>Event ended</h4>
-<% else %>
-  <% if !@event.attendees.include? current_user %>
-    <%= link_to "Attend Event", join_event_path, class: "btn btn-primary" %>
-  <% else %>
-    <h4>You are attending this event</h4>
-  <% end %>
-<% end %>
-<hr>
-<% if @event.attendees.any? %>
-<h3>Attendees: </h3>
-<% @event.attendees.each do |attendee| %>
-  <ol>
-    <li> <%= link_to attendee.name, attendee %></li>
-  </ol>
-<% end %>
-<% end %>
+<div class="row">
+  <div class="col-md-8">
+    <% if @event.picture.url %>
+      <%= image_tag @event.picture.url %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <% suffix = Date.today < @event.date ? "from now" : "ago" %>
+    <p><%= time_ago_in_words(@event.date)%> <%= suffix %> </p>
+    <p><%= @event.venue%></p>
+    <p><%= @event.description%></p>
+    <% if Event.past_events.include?(@event) %>
+      <h4>Event ended</h4>
+    <% else %>
+      <% if !@event.attendees.include? current_user %>
+        <%= link_to "Attend Event", join_event_path, class: "btn btn-primary" %>
+      <% else %>
+        <h4>You are attending this event</h4>
+      <% end %>
+    <% end %>
+    <% if @event.attendees.any? %>
+      <h3>Attendees: </h3>
+      <% @event.attendees.each do |attendee| %>
+        <ol>
+          <li> <%= link_to attendee.name, attendee %></li>
+        </ol>
+      <% end %>
+    <% end %>
+  </div>
+</div>
