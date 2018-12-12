@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
   get "logout", to: "sessions#destroy"
-  get "/events/:id/join", to: "events#add_attendees", as: "join_event"
+  get "/events/:id/join", to: "attendances#create", as: "join_event"
   
   resources :users do
     resources :events, only: [:new, :edit, :create, :destroy]
