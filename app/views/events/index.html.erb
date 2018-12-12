@@ -1,38 +1,5 @@
 <section>
   <h1>Events</h1>
   <hr>
-  <div class="row">
-    <% if Event.any? %>
-      <% if @upcoming_events.any? %>
-        <div class="col-md-6">
-          <h2 class="my-3">Upcoming Events</h2>
-          <ul class="list-group">
-            <% @upcoming_events.each do |event|%>
-              <li class="list-group-item"> 
-                <%= event.title %>
-                <%= link_to  "Detail", event, class: "btn btn-primary float-right" %>
-              </li>
-            <% end%>
-          </ul>
-        </div>
-      <% end%>
-
-      <% if Event.past_events.any? %>
-        <div class="col-md-6">
-          <h2 class="my-3">Past Events</h2>
-          <ul class="list-group">
-            <% @past_events.each do |event|%>
-              <li class="list-group-item"> 
-                <%= event.title %>
-                <%= link_to  "Detail", event, class: "btn btn-primary float-right" %>
-              </li>
-            <% end%>
-          </ul>
-        </div>
-      <% end%>
-    <% else %>
-      <p>No events yet</p>
-    <% end %>
-  </div>
-
+  <%= render  "events" %>
 </section>
