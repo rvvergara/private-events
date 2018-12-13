@@ -3,7 +3,7 @@ class AttendancesController < ApplicationController
 
   def create
     @user = current_user
-    @event = Event.find_by(id: params[:event_id])
+    @event = Event.find_by(id: params[:attendance][:event_id])
     @attendance = Attendance.new(attendance_params)
     begin
       @attendance.save
@@ -11,7 +11,8 @@ class AttendancesController < ApplicationController
       flash[:danger] = "You are already in this event"
       render "users/show"
     else
-      redirect_to event_path(@event)
+      flash[:success] = "You are now part of this event! Nice"
+      redirect_to @event
     end
   end
 
