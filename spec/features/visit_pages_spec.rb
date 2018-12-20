@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 
 feature "non-logged user visits homepage" do
   before :each do
@@ -102,12 +103,27 @@ end
 feature "logged user visits homepage" do
   before :each do
     @user = User.first
-    session[:user_id] = @user.id
+    page.set_rack_session(user_id:@user.id)
     visit root_path
   end
 
   scenario "user sees a link with his name on it" do
-    expect(current_user).to eq(@user)
+    expect(page).to have_link(@user.name)
+  end
+
+  scenario "user will see link to his/her profile upon clicking his name in upper right corner" do
+    click_on(@user.name)
+    expect(page).to have_link("Profile", href: user_path(@user))
+  end
+
+  scenario "user will see edit profile link" do
+    click_on(@user.name)
+    expect(page).to have_link("Edit Profile", href: edit_user_path(@user))
+  end
+
+  scenario "user will see logout link" do
+    click_on(@user.name)
+    expect(page).to have_link("Logout", href: logout_path)
   end
 
 end
