@@ -8,11 +8,11 @@ class Event < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validates :title, :date, :venue, :description, presence: true
 
-  def add_attendee(user)
-    self.attendees.push(user)
-  end
+  # def add_attendee(user)
+  #   self.attendees.push(user)
+  # end
 
-  def event_date
-    self.date.localtime.to_s.gsub(/.\+.{4}/, '')
-  end
+  # def event_date
+  #   self.date.localtime.to_s.gsub(/.\+.{4}/, '')
+  # end
 end
