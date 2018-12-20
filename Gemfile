@@ -47,6 +47,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
   gem 'launchy'
+  gem 'rack_session_access'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
