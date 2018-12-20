@@ -7,11 +7,11 @@ User.create!(
   password_confirmation: "password",
 )
 
-5.times do |n|
+11.times do |n|
 User.create!(
-  name: "User-#{n}",
-  username: "user#{n}",
-  email: "user#{n}@gmail.com",
+  name: "User-#{n+1}",
+  username: "user#{n+1}",
+  email: "user#{n+1}@gmail.com",
   password:              "password",
   password_confirmation: "password"
 )
@@ -30,3 +30,21 @@ User.last.events_created.create(
   venue: "Mars",
   description: "This has already happened"
 )
+
+11.times do |n|
+  User.find_by(id: n+1).events_created.create(
+    title: "Upcoming Event#{n+1} by User-#{n+1}",
+    date: Faker::Time.forward(60, :evening),
+    venue: Faker::GameOfThrones.city,
+    description: Faker::Lorem.paragraph(3),
+  )
+end
+
+6.times do |n|
+  User.find_by(id: n+1).events_created.create(
+    title: "Past Event#{n+1} by User-#{n+1}",
+    date: Faker::Time.backward(10, :evening),
+    venue: Faker::GameOfThrones.city,
+    description: Faker::Lorem.paragraph(3),
+  )
+end
