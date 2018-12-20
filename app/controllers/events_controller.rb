@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find_by(id: params[:id])
+    @attendee_id = current_user ? current_user.id : nil
   end
 
   def new
