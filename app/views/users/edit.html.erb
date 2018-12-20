@@ -1,2 +1,12 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>Edit User</h1>
+
+<section class="mt-3">
+  <%= simple_form_for @user do |f| %>
+    <%= f.input :name %>
+    <%= f.input :username %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.button :submit, class:"btn-primary" %>
+  <% end %>
+</section>

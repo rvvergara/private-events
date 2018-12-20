@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :authorized_user, only: [:edit, :update, :destroy]
+  
   def index
   end
 
@@ -11,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: params[:id])
   end
 
   def create
@@ -25,9 +29,25 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find_by(id: params[:id])
+    if @user.update(user_params)
+      flash[:success] = "Your profile is updated"
+      redirect_to @user
+    else
+      render "edit"
+    end
   end
 
   def destroy
+    @user = User.find_by(id: params[:id])
+
+    if !@user.nil?
+      flash[:danger] = "User not found"
+      redirect_to root_path
+    else
+      @user.delete
+      redirect_to root_path
+    end
   end
 
   private

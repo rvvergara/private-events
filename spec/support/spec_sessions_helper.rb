@@ -1,4 +1,4 @@
-module SessionsHelper
+module SpecSessionsHelper
   def login(user)
     session[:user_id] = user.id
   end
@@ -29,6 +29,7 @@ module SessionsHelper
     current_user == user
   end
 
+
   def authorized_user
     id = params[:controller] == "users" ? params[:id] : params[:creator_id]
     user = User.find_by(id: id)
@@ -41,5 +42,4 @@ module SessionsHelper
   def logout
     session[:user_id] = nil
   end
-
 end
