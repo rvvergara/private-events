@@ -5,6 +5,10 @@ class User < ApplicationRecord
 
   has_many :attendances, foreign_key: :attendee_id
 
+  has_many :invitations, foreign_key: :invitee_id
+
+  has_many :invited_to_events, through: :invitations, source: :event
+
   has_many :events_attended, through: :attendances, source: :event
 
   has_many :events_created, foreign_key: :creator_id, class_name: "Event"
