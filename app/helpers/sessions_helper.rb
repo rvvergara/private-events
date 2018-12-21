@@ -6,9 +6,15 @@ module SessionsHelper
   # Creates a current user
   def current_user
     # 1. If there's a current session user meaning there is an existing session userID:
-    if(session[:user_id])
-      # 2. Create a current user if not already assigned:
+    if session[:user_id]
+      # 2. Create a current user if not already assigned: end
       @current_user ||= User.find_by(id: session[:user_id])
+    elsif cookies.signed[:user_id]
+      user = User.find_by(id: cookies.signed[:user_id])
+      if user && user.authenticated?(cookies[:remember_token])
+        login(user)
+        @current_user = user
+      end
     end
   end
 
@@ -39,8 +45,21 @@ module SessionsHelper
   end
 
   def logout
-    session[:user_id] = nil
-    redirect_to root_path
+    forget(current_user)
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
+
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
   end
 
 end
