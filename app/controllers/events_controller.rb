@@ -25,6 +25,7 @@ class EventsController < ApplicationController
       flash[:success] = "#{@event.title} has been created. Invite people to attend!"
       redirect_to @event
     else
+      render "new"
     end
   end
 
