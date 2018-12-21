@@ -36,7 +36,11 @@
       <% end %>
     <% end %>
     <% if current_user == @event.creator %>
-      <%= link_to "Invite People", "#", class: "btn btn-info"%>
+      <%= form_tag(invitations_path(current_user,@event), method: "get") do %>
+        <%= hidden_field_tag :event_id, @event.id %>
+        <%= hidden_field_tag :creator_id, @creator.id %>
+        <%= submit_tag "Invite People", class: "btn btn-info"%>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -1,0 +1,12 @@
+<h1>Invite People to <%=@event.title%></h1>
+
+<% if @users.any? %>
+  <ul id="for-invitation" class="list-group">
+    <% @users.each do |user| %>
+      <li class="list-group-item">
+        <%= user.name %>
+        <p>Invite Button Here</p>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
