@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attribute :new_token
   validates :name, :email, presence: true
   has_secure_password
 
@@ -16,4 +17,20 @@ class User < ApplicationRecord
     self.events_attended.where("date < ?", Date.today)
   end
 
+  # For use in factories and remembering users later on - from RailsTutorial ch8 section 8.2.4
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  # For use in generating remember tokens and also password reset tokens/activation tokens
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  # Saves a new remember_digest into the database
+  def remember
+    update_attribute(:remember_digest, User.digest(User.new_token))
+  end
 end
