@@ -30,10 +30,13 @@
     <% if @event.attendees.any? %>
       <h3><%= pluralize(@event.attendees.count, "person") %> attending this event: </h3>
       <% @event.attendees.each do |attendee| %>
-        <ul>
+        <ul id="attendee_list">
           <li> <%= link_to attendee.name, attendee %></li>
         </ul>
       <% end %>
+    <% end %>
+    <% if current_user == @event.creator %>
+      <%= link_to "Invite People", "#", class: "btn btn-info"%>
     <% end %>
   </div>
 </div>

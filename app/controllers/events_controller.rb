@@ -20,6 +20,7 @@ class EventsController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     @event = @user.events_created.new(event_params)
     if @event.save
+      Attendance.create(event_id: @event.id, attendee_id: @user.id)
       flash[:success] = "#{@event.title} has been created. Invite people to attend!"
       redirect_to @event
     else
