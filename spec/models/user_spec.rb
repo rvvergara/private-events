@@ -27,5 +27,24 @@ describe User do
     end
   end
 
+  context "User.digest" do
+    it "returns a hashed version of the user password" do
+      expect(User.digest("password")).to eq("password")
+    end
+  end
+
+  context "User.new_token" do
+    it "returns a random string" do
+      expect(User.new_token).to_not eq(User.new_token)
+    end
+  end
+
+  context "User.remember_token" do
+    it "saves a new remember_digest for the user in the database" do
+      user = FactoryBot.build(:valid_user)
+      user.remember
+      expect(user.remember_digest.nil?).to_not be(true)
+    end
+  end
 
 end
