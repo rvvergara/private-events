@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_12_21_114451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "accepted", default: false
-    t.boolean "decline", default: false
+    t.boolean "declined", default: false
     t.index ["event_id"], name: "index_invitations_on_event_id"
     t.index ["invitee_id", "event_id"], name: "index_invitations_on_invitee_id_and_event_id", unique: true
     t.index ["invitee_id"], name: "index_invitations_on_invitee_id"
