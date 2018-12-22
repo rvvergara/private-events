@@ -1,0 +1,12 @@
+<% if @user.invitations.any? %>
+  <p>You are invited to</p>
+  <ul class="list-group">
+    <% @user.invitations.each do |invitation|%>
+      <li class="list-group-item">
+        <%= link_to invitation.event.title, event_path(invitation.event)%>
+        <% render "invitations/accept_form", locals:{invitee: @user, invitation: invitation}%>
+        <% render "invitations/decline_form", locals:{invitee: @user, invitation: invitation}%>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

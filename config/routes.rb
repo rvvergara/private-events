@@ -16,5 +16,5 @@ Rails.application.routes.draw do
 
   resources :attendances, only: :create
 
-  resources :invitations, only: [:new, :create]
+  resources :invitations, only: [:new, :create, :update]
 end

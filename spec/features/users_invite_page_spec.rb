@@ -23,8 +23,8 @@ feature "Perspective of visitor" do
     visit add_invitees_path(@creator, @event)
   end
 
-  scenario "visitor will be redirected to his own page" do
-    expect(page).to have_selector("h1", text: @visitor.name)
+  scenario "visitor will be redirected to the event page" do
+    expect(page).to have_selector("h1", text: @event.title)
   end
 
   scenario "visitor will see a flash message" do

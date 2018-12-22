@@ -8,7 +8,7 @@ RSpec.describe UsersInviteController do
         @creator = User.first
         @event = FactoryBot.create(:future_event, creator_id: @creator.id)
         login(@creator)
-        get :show, params: {creator_id: @creator.id, event_id: @event.id}
+        get :show, params: {user_id: @creator.id, event_id: @event.id}
       end
       
       it "assigns the chosen event to @event" do
@@ -26,11 +26,11 @@ RSpec.describe UsersInviteController do
         @visitor = User.last
         @event = FactoryBot.create(:future_event, creator_id: @creator.id)
         login(@visitor)
-        get :show, params: {creator_id: @creator.id, event_id: @event.id}
+        get :show, params: {user_id: @creator.id, event_id: @event.id}
       end
 
       it "redirects to the visitor's own page" do
-        expect(response).to redirect_to(user_path(@visitor))
+        expect(response).to redirect_to(event_path(@event))
       end
 
       it "shows a flash[:danger]" do

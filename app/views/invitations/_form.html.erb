@@ -1,5 +1,6 @@
 <%= form_for Invitation.new do |f| %>
   <%= f.hidden_field :event_id, value: event.id %>
   <%= f.hidden_field :invitee_id, value: user.id %>
+  <%= hidden_field_tag :creator_id,  creator.id %>
   <%= f.submit "Invite", class: "btn btn-primary btn-sm"%>
 <% end %>
