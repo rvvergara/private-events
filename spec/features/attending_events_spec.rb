@@ -65,11 +65,18 @@ feature "logged user clicks on Accept Invite" do
     page.set_rack_session(user_id: @invitee.id)
     visit root_path
     click_on("Accept")
+    @invitee.reload
   end
 
   scenario "root page will now show Events will be attending" do
     skip
     expect(page).to have_content("Events #{@invitee.name} will be attending:")
+  end
+
+  scenario "user will now see event in his own page" do
+    skip
+    visit user_path(@invitee)
+    expect(page).to have_link(@event.title, event_path(@event))
   end
 
 end

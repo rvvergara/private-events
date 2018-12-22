@@ -8,6 +8,13 @@
         method: :post,
         class:"btn btn-success btn-sm" 
         %>
+        <%= link_to "Decline", invitation_path(id: invitation.id, invitation:{
+          event_id: invitation.event.id,
+          invitee_id: @user.id}),
+        method: :patch,
+        class: "btn btn-danger btn-sm"
+        %>
+
       </li>
     <% end %>
   </ul>

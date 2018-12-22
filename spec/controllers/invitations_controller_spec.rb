@@ -42,4 +42,29 @@ RSpec.describe InvitationsController do
 
   end
 
+  describe "PATCH #update" do
+    before :each do
+      @invitee = FactoryBot.create(:valid_user)
+      @event = FactoryBot.create(:future_event)
+      @invitation = FactoryBot.create(:new_invitation, event_id: @event.id, invitee_id: @invitee.id)
+      
+      login(@invitee)
+
+      parameters = {params:{
+        id: @invitation.id,
+        invitation: {
+          invitee_id: @invitee.id,
+          event_id: @event.id,
+        }
+      }}
+      patch :update, parameters
+    end
+
+    it "changes the database" do
+      @invitation.reload
+      expect(@invitation.declined?).to be(true)
+    end
+
+  end
+
 end

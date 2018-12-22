@@ -14,5 +14,11 @@ class InvitationsController < ApplicationController
   end
 
   def update
+    @invitee = User.find_by(id:params[:invitation][:invitee_id])
+    @event = Event.find_by(id:params[:invitation][:event_id])
+    @invitation = Invitation.find_by(id: params[:id])
+    @invitation.decline
+    flash[:warning] = "You declined invitation to attend #{@event.title}"
+    redirect_back(fallback_location: root_path)
   end
 end

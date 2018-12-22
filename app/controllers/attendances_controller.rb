@@ -14,7 +14,6 @@ class AttendancesController < ApplicationController
     else
       @invitation.accept
       flash[:success] = "You are now part of #{@event.title}! Nice"
-      # redirect_to @event
       redirect_back(fallback_location: event_path(@event))
     end
   end
