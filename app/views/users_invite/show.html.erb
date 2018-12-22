@@ -5,7 +5,7 @@
     <% @users.each do |user| %>
       <li class="list-group-item">
         <%= user.name %>
-        <p>Invite Button Here</p>
+        <%= render partial: "invitations/form", locals: {event: @event, user: user} %>
       </li>
     <% end %>
   </ul>

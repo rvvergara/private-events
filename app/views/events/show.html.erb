@@ -36,7 +36,7 @@
       <% end %>
     <% end %>
     <% if current_user == @event.creator %>
-      <%= form_tag(invite_users_path(@event.creator.id,@event), method: "get") do %>
+      <%= form_tag(add_invitees_path(@event.creator.id,@event), method: "get") do %>
         <%= hidden_field_tag :event_id, @event.id %>
         <%= hidden_field_tag :creator_id, @creator.id %>
         <%= submit_tag "Invite People", class: "btn btn-info"%>
