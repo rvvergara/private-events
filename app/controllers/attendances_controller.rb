@@ -5,14 +5,17 @@ class AttendancesController < ApplicationController
     @user = current_user
     @event = Event.find_by(id: params[:attendance][:event_id])
     @attendance = Attendance.new(attendance_params)
+    @invitation = Invitation.where("event_id=? AND invitee_id=?", @event.id, @user.id).first
     begin
       @attendance.save
     rescue => exception
       flash[:danger] = "You are already in this event"
-      render "users/show"
+      redirect_back(fallback_location:root_path)
     else
-      flash[:success] = "You are now part of this event! Nice"
-      redirect_to @event
+      @invitation.accept
+      flash[:success] = "You are now part of #{@event.title}! Nice"
+      # redirect_to @event
+      redirect_back(fallback_location: event_path(@event))
     end
   end
 

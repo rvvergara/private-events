@@ -4,8 +4,10 @@
     <% @user.invitations.each do |invitation|%>
       <li class="list-group-item">
         <%= link_to invitation.event.title, event_path(invitation.event)%>
-        <% render "invitations/accept_form", locals:{invitee: @user, invitation: invitation}%>
-        <% render "invitations/decline_form", locals:{invitee: @user, invitation: invitation}%>
+        <%= link_to "Accept", attendances_path(attendance:{event_id: invitation.event.id, attendee_id: @user.id}),
+        method: :post,
+        class:"btn btn-success btn-sm" 
+        %>
       </li>
     <% end %>
   </ul>

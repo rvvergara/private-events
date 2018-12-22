@@ -14,6 +14,5 @@ class InvitationsController < ApplicationController
   end
 
   def update
-    
   end
 end
