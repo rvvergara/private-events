@@ -47,4 +47,21 @@ describe User do
     end
   end
 
+  context "invitations association" do
+    before :each do
+      @event = FactoryBot.create(:future_event)
+      @user = FactoryBot.create(:valid_user)
+      FactoryBot.create(:new_invitation, event_id: @event.id, invitee_id: @user.id)
+    end
+
+    it "shows that the user is an invitee to the event" do
+      expect(@event.invitees).to include(@user)
+    end
+
+    it "shows that the event is one of the events the user is invited to" do
+      expect(@user.invited_to_events).to include(@event)
+    end
+
+  end
+
 end
