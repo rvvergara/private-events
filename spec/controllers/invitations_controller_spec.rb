@@ -55,6 +55,8 @@ RSpec.describe InvitationsController do
         invitation: {
           invitee_id: @invitee.id,
           event_id: @event.id,
+          responded: true,
+          accepted: false
         }
       }}
       patch :update, parameters
@@ -62,7 +64,7 @@ RSpec.describe InvitationsController do
 
     it "changes the database" do
       @invitation.reload
-      expect(@invitation.declined?).to be(true)
+      expect(@invitation.responded?).to be(true)
     end
 
   end

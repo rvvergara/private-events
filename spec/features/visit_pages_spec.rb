@@ -67,10 +67,6 @@ feature "non-logged user visits an event page" do
     expect(page).to have_content(@upcoming_event.description)
   end
 
-  scenario "user will see Attend Event button that leads to login path" do
-    expect(page).to have_link("Attend Event")
-  end
-
   scenario "user will list of attendees of the event" do
     guests = @upcoming_event.attendees
     if guests.any?

@@ -4,13 +4,6 @@ class Invitation < ApplicationRecord
 
   # Update accepted attribute to true
   def accept
-    update(accepted: true)
-    update(declined:false) if declined
-  end
-
-  # Update decline attribute to true
-  def decline
-    update(declined: true)
-    update(accepted:false) if accepted
+    update(accepted: true, responded: true)
   end
 end

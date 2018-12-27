@@ -10,6 +10,7 @@ class EventsController < ApplicationController
     @event = Event.find_by(id: params[:id])
     @creator = @event.creator
     @attendee_id = current_user ? current_user.id : nil
+    @invitation = Invitation.where("event_id=? AND invitee_id=?", @event.id, @attendee_id).first
   end
 
   def new

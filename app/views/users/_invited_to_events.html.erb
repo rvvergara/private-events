@@ -2,20 +2,24 @@
   <p>You are invited to</p>
   <ul class="list-group">
     <% @user.invitations.each do |invitation|%>
-      <li class="list-group-item">
-        <%= link_to invitation.event.title, event_path(invitation.event)%>
-        <%= link_to "Accept", attendances_path(attendance:{event_id: invitation.event.id, attendee_id: @user.id}),
-        method: :post,
-        class:"btn btn-success btn-sm" 
-        %>
-        <%= link_to "Decline", invitation_path(id: invitation.id, invitation:{
-          event_id: invitation.event.id,
-          invitee_id: @user.id}),
-        method: :patch,
-        class: "btn btn-danger btn-sm"
-        %>
-
-      </li>
+      <%if !invitation.responded?%>
+        <li class="list-group-item">
+          <%= link_to invitation.event.title, event_path(invitation.event)%>
+          <%= link_to "Accept", attendances_path(attendance:{event_id: invitation.event.id, attendee_id: @user.id}),
+          method: :post,
+          class:"btn btn-success btn-sm" 
+          %>
+          <%= link_to "Decline", invitation_path(id: invitation.id, invitation:{
+            event_id: invitation.event.id,
+            invitee_id: @user.id,
+            responded: true,
+            accepted: false
+            }),
+          method: :patch,
+          class: "btn btn-danger btn-sm"
+          %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>

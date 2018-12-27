@@ -4,7 +4,6 @@ FactoryBot.define do
 
     invitee_id Faker::Number.between(User.first.id, User.last.id)
 
-    accepted false
-    declined false
+    responded false
   end
 end

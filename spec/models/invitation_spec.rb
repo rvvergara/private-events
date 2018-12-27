@@ -9,22 +9,13 @@ RSpec.describe Invitation do
   end
 
   describe "accept instance method" do
-    it "sets the invitation's accepted attribute to true" do
+    it "sets the invi
+    tation's accepted attribute to true" do
       invitation = FactoryBot.create(:new_invitation)
 
       invitation.accept
 
       expect(invitation.accepted).to be(true)
-    end
-  end
-
-  describe "decline instance method" do
-    it "sets the invitation's declined attribute to true" do
-      invitation = FactoryBot.create(:new_invitation)
-
-      invitation.decline
-
-      expect(invitation.declined).to be(true)
     end
   end
 

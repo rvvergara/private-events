@@ -1,30 +1,6 @@
 require 'rails_helper'
 require 'spec_helper'
 
-feature "non logged user tries to attend an upcoming event" do
-  before :each do
-    @event = Event.last
-    visit event_path(@event)
-    click_on("Attend Event")
-  end
-
-  context "user will be redirected to login page" do
-    scenario "user will be redirected to login page" do
-      expect(page).to have_selector("h1", text:"Log In")
-    end
-    
-    scenario "user will find field for username" do
-      expect(page).to have_field("Username")
-    end
-
-    scenario "user will find field for password" do
-      expect(page).to have_field("Password")
-    end
-
-  end
-
-end
-
 feature "logged user tries to attend upcoming 
 event from event page" do
   before :each do
@@ -33,7 +9,7 @@ event from event page" do
     @invitation = FactoryBot.create(:new_invitation, event_id: @event.id, invitee_id: @invitee.id)
     page.set_rack_session(user_id: @invitee.id)
     visit event_path(@event)
-    click_on("Attend Event")
+    click_on("Accept")
   end
 
   scenario "user will now see the text 'You are attending this event' in lieu of Attend Event button" do

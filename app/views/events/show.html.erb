@@ -18,10 +18,19 @@
     <% if Event.past_events.include?(@event) %>
       <h4>Event ended</h4>
     <% else %>
-      <% if !@event.attendees.include? current_user %>
-        <%= link_to "Attend Event", attendances_path(attendance:{event_id: @event.id, attendee_id: @attendee_id}),
+      <% if @event.invitees.include?(current_user) && !@event.attendees.include?(current_user) && !Invitation.where("event_id=? AND invitee_id=?", @event.id, current_user.id).first.responded? %>
+        <h5>You are invited to this event</h5>
+        <%= link_to "Accept", attendances_path(attendance:{event_id: @event.id, attendee_id: current_user.id}),
         method: :post,
-        class:"btn btn-primary" 
+        class:"btn btn-success btn-sm" 
+        %>
+        <%= link_to "Decline", invitation_path(id: @invitation.id, invitation:{
+          event_id: @event.id,
+          invitee_id: current_user.id,
+          responded: true,
+          accepted: false}),
+          method: :patch,
+        class: "btn btn-danger btn-sm"
         %>
       <% else %>
         <h4>You are attending this event</h4>
