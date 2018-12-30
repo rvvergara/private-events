@@ -18,22 +18,36 @@
     <% if Event.past_events.include?(@event) %>
       <h4>Event ended</h4>
     <% else %>
-      <% if !@event.attendees.include? current_user %>
-        <%= link_to "Attend Event", attendances_path(attendance:{event_id: @event.id, attendee_id: @attendee_id}),
+      <% if @event.unresponsive_invitees.include?(current_user) %>
+        <h5>You are invited to this event</h5>
+        <%= link_to "Accept", attendances_path(attendance:{event_id: @event.id, attendee_id: current_user.id}),
         method: :post,
-        class:"btn btn-primary" 
+        class:"btn btn-success btn-sm" 
         %>
-      <% else %>
+        <%= link_to "Decline", invitation_path(id: @invitation.id, invitation:{
+          event_id: @event.id,
+          invitee_id: current_user.id,
+          responded: true,
+          accepted: false}),
+          method: :patch,
+        class: "btn btn-danger btn-sm"
+        %>
+      <% elsif @event.attendees.include?(current_user) %>
         <h4>You are attending this event</h4>
       <% end %>
     <% end %>
+    
     <% if @event.attendees.any? %>
       <h3><%= pluralize(@event.attendees.count, "person") %> attending this event: </h3>
       <% @event.attendees.each do |attendee| %>
-        <ul>
+        <ul id="attendee_list">
           <li> <%= link_to attendee.name, attendee %></li>
         </ul>
       <% end %>
+    <% end %>
+
+    <% if current_user == @event.creator %>
+      <%= link_to "Invite People", add_invitees_path(current_user, @event), class: "btn btn-success"%>
     <% end %>
   </div>
 </div>

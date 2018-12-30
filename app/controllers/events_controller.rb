@@ -8,7 +8,9 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find_by(id: params[:id])
+    @creator = @event.creator
     @attendee_id = current_user ? current_user.id : nil
+    @invitation = Invitation.where("event_id=? AND invitee_id=?", @event.id, @attendee_id).first
   end
 
   def new
@@ -20,9 +22,11 @@ class EventsController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     @event = @user.events_created.new(event_params)
     if @event.save
+      Attendance.create(event_id: @event.id, attendee_id: @user.id)
       flash[:success] = "#{@event.title} has been created. Invite people to attend!"
       redirect_to @event
     else
+      render "new"
     end
   end
 
