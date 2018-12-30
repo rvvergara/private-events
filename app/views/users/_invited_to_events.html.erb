@@ -1,8 +1,7 @@
-<% if @user.invitations.any? %>
+<% if @user.unresponded_invitations.any? %>
   <p>You are invited to</p>
   <ul class="list-group">
-    <% @user.invitations.each do |invitation|%>
-      <%if !invitation.responded?%>
+    <% @user.unresponded_invitations.each do |invitation|%>
         <li class="list-group-item">
           <%= link_to invitation.event.title, event_path(invitation.event)%>
           <%= link_to "Accept", attendances_path(attendance:{event_id: invitation.event.id, attendee_id: @user.id}),
@@ -19,7 +18,6 @@
           class: "btn btn-danger btn-sm"
           %>
         </li>
-      <% end %>
     <% end %>
   </ul>
 <% end %>

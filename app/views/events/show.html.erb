@@ -18,7 +18,7 @@
     <% if Event.past_events.include?(@event) %>
       <h4>Event ended</h4>
     <% else %>
-      <% if @event.invitees.include?(current_user) && !@event.attendees.include?(current_user) && !Invitation.where("event_id=? AND invitee_id=?", @event.id, current_user.id).first.responded? %>
+      <% if @event.unresponsive_invitees.include?(current_user) %>
         <h5>You are invited to this event</h5>
         <%= link_to "Accept", attendances_path(attendance:{event_id: @event.id, attendee_id: current_user.id}),
         method: :post,
@@ -32,10 +32,11 @@
           method: :patch,
         class: "btn btn-danger btn-sm"
         %>
-      <% else %>
+      <% elsif @event.attendees.include?(current_user) %>
         <h4>You are attending this event</h4>
       <% end %>
     <% end %>
+    
     <% if @event.attendees.any? %>
       <h3><%= pluralize(@event.attendees.count, "person") %> attending this event: </h3>
       <% @event.attendees.each do |attendee| %>
@@ -44,6 +45,7 @@
         </ul>
       <% end %>
     <% end %>
+
     <% if current_user == @event.creator %>
       <%= link_to "Invite People", add_invitees_path(current_user, @event), class: "btn btn-success"%>
     <% end %>

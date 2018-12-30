@@ -17,6 +17,10 @@ class Event < ApplicationRecord
   
   validates :title, :date, :venue, :description, presence: true
 
+  def unresponsive_invitees
+    self.invitees.where("responded=?",false)
+  end
+
   # def add_attendee(user)
   #   self.attendees.push(user)
   # end
