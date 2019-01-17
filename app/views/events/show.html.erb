@@ -1,0 +1,53 @@
+<h1 class="title"><%= @event.title%> 
+  <% if @event.creator == current_user %>
+  <small><%= link_to "Edit", edit_user_event_path(current_user, @event), class:"btn btn-info btn-sm" %></small>
+  <% end %>
+</h1>
+<hr>
+<div class="row">
+  <div class="col-md-8">
+    <% if @event.picture.url %>
+      <%= image_tag @event.picture.url, class: "img-fluid" %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <% suffix = Date.today < @event.date ? "from now" : "ago" %>
+    <p><%= time_ago_in_words(@event.date)%> <%= suffix %> </p>
+    <p><%= @event.venue%></p>
+    <p><%= @event.description%></p>
+    <% if Event.past_events.include?(@event) %>
+      <h4>Event ended</h4>
+    <% else %>
+      <% if @event.unresponsive_invitees.include?(current_user) %>
+        <h5>You are invited to this event</h5>
+        <%= link_to "Accept", attendances_path(attendance:{event_id: @event.id, attendee_id: current_user.id}),
+        method: :post,
+        class:"btn btn-success btn-sm" 
+        %>
+        <%= link_to "Decline", invitation_path(id: @invitation.id, invitation:{
+          event_id: @event.id,
+          invitee_id: current_user.id,
+          responded: true,
+          accepted: false}),
+          method: :patch,
+        class: "btn btn-danger btn-sm"
+        %>
+      <% elsif @event.attendees.include?(current_user) %>
+        <h4>You are attending this event</h4>
+      <% end %>
+    <% end %>
+    
+    <% if @event.attendees.any? %>
+      <h3><%= pluralize(@event.attendees.count, "person") %> attending this event: </h3>
+      <% @event.attendees.each do |attendee| %>
+        <ul id="attendee_list">
+          <li> <%= link_to attendee.name, attendee %></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% if current_user == @event.creator %>
+      <%= link_to "Invite People", add_invitees_path(current_user, @event), class: "btn btn-success"%>
+    <% end %>
+  </div>
+</div>

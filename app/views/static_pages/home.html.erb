@@ -1,0 +1,10 @@
+<% if logged_in? %>
+  <%= render  "users/user" %>
+  <%= render "users/invited_to_events"%>
+<% else %>
+  <section>
+    <h1>Welcome to events</h1>
+    <hr>
+    <%= render  "events/events" %>
+  </section>
+<% end %>

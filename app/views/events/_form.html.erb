@@ -1,0 +1,8 @@
+<%= simple_form_for [@user, @event] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :date %>
+  <%= f.input :venue %>
+  <%= f.input :description %>
+  <%= f.input :picture %>
+  <%= f.button :submit, class: "btn-primary" %>
+<% end %>

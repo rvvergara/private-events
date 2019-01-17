@@ -1,0 +1,10 @@
+<% if @event.errors.any? %>
+    <h3><%= pluralize(@event.errors.count, "errors")%> prevented the event from being saved: </h3>
+    <ol>
+      <% @event.errors.full_messages.each do |message|%>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
