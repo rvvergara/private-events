@@ -13,7 +13,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'carrierwave',    '1.2.3'
+gem 'carrierwave',    '1.3.2'
 gem 'mini_magick', '4.9.2'
 gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'font-awesome-rails'
